@@ -1,12 +1,9 @@
-import sys
 import os
 import time
-import numpy as np
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import OneHotEncoder
 
+import numpy as np
 from PIL import Image
+from sklearn.manifold import TSNE
 
 SIZE = 1280
 WIDTH = 32
@@ -92,30 +89,10 @@ for i in range(0, NUM_CLASSES):
             val_labels[index][i] = 1
             index += 1
 
-print(input_images)
-print(input_images.shape)
-print(input_labels)
-print(input_labels.shape)
-
-
-enc = OneHotEncoder(handle_unknown='ignore')
-leter = np.array(LETTERS_DIGITS)
-print(enumerate(set(leter)))
-# print(leter)
-# enc.fit(np.array(LETTERS_DIGITS).reshape([-1, 1]))
-# decode = enc.inverse_transform(input_labels)
-# targets = decode.tolist()
-# print(enumerate(targets))
-# print('t-SEN降维处理')
-# X_ = TSNE(n_components=2, init='pca').fit_transform(input_images)
-# print(X_)
-# print('存储降维后的digits-input-images数据')
-# np.save('preprocess_data/digits/digits_input_images_tSEN.npy', X_)
-# fig = plt.figure()
-# for i, t in enumerate(set(leter)):
-#     idx = leter == t
-#     plt.scatter(X_[idx, 0], X_[idx, 1])
-# plt.show()
+print('t-SEN降维处理')
+X_ = TSNE(n_components=2, init='pca').fit_transform(input_images)
+print('存储降维后的digits-input-images数据')
+np.save('preprocess_data/digits/digits_input_images_tSEN.npy', X_)
 
 print('保存预处理数据')
 np.save('preprocess_data/digits/digits_input_images.npy', input_images)

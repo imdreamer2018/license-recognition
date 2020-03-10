@@ -1,9 +1,5 @@
-import sys
-import os
-import time
-import numpy as np
-from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
+import numpy as np
 from sklearn.preprocessing import OneHotEncoder
 
 LETTERS_DIGITS = (
@@ -12,20 +8,13 @@ LETTERS_DIGITS = (
 
 input_labels = np.load('preprocess_data/digits/digits_input_labels.npy')
 
+#将One-hot热变化转为原始格式
 enc = OneHotEncoder(handle_unknown='ignore')
-# leter = np.array(LETTERS_DIGITS)
-# print(enumerate(set(leter)))
-
 enc.fit(np.array(LETTERS_DIGITS).reshape([-1, 1]))
 decode = enc.inverse_transform(input_labels)
 targets = decode.flatten()
-print(decode)
 
-
-leter = np.array(LETTERS_DIGITS)
-print(leter)
-print(list(enumerate(leter)))
-
+#加载t-SEN数据
 X_ = np.load('preprocess_data/digits/digits_input_images_tSEN.npy')
 
 fig = plt.figure()

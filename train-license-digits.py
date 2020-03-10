@@ -1,13 +1,10 @@
-import sys
 import os
+import sys
 import time
-import random
 
+import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
-from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
-
 from PIL import Image
 
 SIZE = 1280
@@ -52,7 +49,6 @@ if __name__ == '__main__' and sys.argv[1] == 'train':
     val_images = np.load('preprocess_data/digits/digits_val_images.npy')
     input_labels = np.load('preprocess_data/digits/digits_input_labels.npy')
     val_labels = np.load('preprocess_data/digits/digits_val_labels.npy')
-    print(val_images,val_labels)
     input_count = input_images.shape[0]
 
 
@@ -88,7 +84,7 @@ if __name__ == '__main__' and sys.argv[1] == 'train':
         W_fc2 = tf.Variable(tf.truncated_normal([512, NUM_CLASSES], stddev=0.1), name="W_fc2")
         b_fc2 = tf.Variable(tf.constant(0.1, shape=[NUM_CLASSES]), name="b_fc2")
 
-        # 定义优化器和训练op
+        # 定义优化器、训练op、学习率、损失函数
         y_conv = tf.matmul(h_fc1_drop, W_fc2) + b_fc2
         cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_, logits=y_conv))
         learning_rate = 1e-4
@@ -112,6 +108,7 @@ if __name__ == '__main__' and sys.argv[1] == 'train':
         remainder = input_count % batch_size
         print("训练数据集分成 %s 批, 前面每批 %s 个数据，最后一批 %s 个数据" % (batches_count + 1, batch_size, remainder))
 
+        #设置画板
         ax1 = plt.subplot(211)
         ax1.set_ylabel("Accuracy")
         ax2 = plt.subplot(212, sharex=ax1)
