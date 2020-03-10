@@ -90,9 +90,9 @@ for i in range(0, NUM_CLASSES):
             index += 1
 
 print('t-SEN降维处理')
-X_ = TSNE(n_components=2, init='pca').fit_transform(input_images)
+X_ = TSNE(n_components=3, init='pca').fit_transform(input_images)
 print('存储降维后的digits-input-images数据')
-np.save('preprocess_data/digits/digits_input_images_tSEN.npy', X_)
+np.save('preprocess_data/digits/digits_input_images_tSEN_3.npy', X_)
 
 print('保存预处理数据')
 np.save('preprocess_data/digits/digits_input_images.npy', input_images)
